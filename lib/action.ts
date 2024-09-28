@@ -76,10 +76,8 @@ export const updateImage = async (id: string, prevState: unknown, formData: Form
         });
         imagePath = url
     }
-   
-
     try {
-        await prisma?.upload.update({
+        await prisma.upload.update({
             data:{
                 title,
                 image: imagePath,
@@ -99,23 +97,18 @@ export const updateImage = async (id: string, prevState: unknown, formData: Form
     redirect("/")
 }
 
-export const deleteImage = async (id: string) => {
+export const deleteImage = async (id: string):Promise<void> => {
     const data = await getImageById(id) 
-    if (!data) {
-        return {
-            message: "No data found"
-        }
-    }
+    if (!data) return 
     await del(data.image )
+    
     try {
         await prisma.upload.delete({
-            where: {id}
+            where: {id},
         })
     } catch (error) {
-        console.log(error);
-        return {
-            message: "Failed to delete data"
-        } 
+        
+        return console.log(error);
     }
     revalidatePath("/")
 }
