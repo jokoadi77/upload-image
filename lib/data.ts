@@ -9,8 +9,9 @@ export const getImages = async () => {
         })
         return result
     } catch (error) {
-        throw new Error("Failed to fetch data")
         console.log(error);
+
+        throw new Error("Failed to fetch data")
         
     }
 }
@@ -22,6 +23,8 @@ export const getImageById = async (id : string) => {
         })
         return result
     } catch (error) {
+        console.log(error);
+        
         throw new Error("Failed to fetch data")
         
     }
