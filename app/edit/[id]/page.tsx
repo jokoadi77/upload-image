@@ -3,9 +3,9 @@ import { getImageById } from "@/lib/data"
 import { notFound } from "next/navigation"
 
 
-const EditPage = async ({params}:{paramas:{id:string}}) => {
+const EditPage = async ({paramas}:{paramas:{id:string}}) => {
 
-    const data = await getImageById(params.id)
+    const data = await getImageById(paramas.id)
     if (!data) {
         return notFound()
     }
